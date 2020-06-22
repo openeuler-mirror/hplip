@@ -1,7 +1,7 @@
 Name: hplip
 Summary: HP Linux Imaging and Printing Project
 Version: 3.18.6
-Release: 9
+Release: 10
 License: GPLv2+ and MIT and BSD and IJG and Public Domain and GPLv2+ with exceptions and ISC
 Url: https://developers.hp.com/hp-linux-imaging-and-printing
 Source0: http://downloads.sourceforge.net/sourceforge/hplip/hplip-%{version}.tar.gz
@@ -274,5 +274,8 @@ install -d ${RPM_BUILD_ROOT}%{_datadir}/hplip/prnt/plugins
 %exclude %{python3_sitearch}/*.la
 
 %changelog
+* Mon Jun 22 2020 lizhenhua <lizhenhua21@huawei.com> -  3.18.6-10
+- Add python3 include path for compiler
+
 * Wed Nov 27 2019 caomeng<caomeng5@huawei.com> -  3.18.6-9
 - Package init
