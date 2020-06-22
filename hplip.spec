@@ -147,6 +147,9 @@ sed -i 's|^AM_INIT_AUTOMAKE|AM_INIT_AUTOMAKE([foreign])|g' configure.in
 
 autoreconf --verbose --force --install
 
+export CFLAGS="%{optflags} $(python3-config --includes)"
+export CXXFLAGS="%{optflags} $(python3-config --includes)"
+
 %configure \
         --enable-scan-build --enable-gui-build --enable-fax-build \
         --disable-foomatic-rip-hplip-install --enable-pp-build \
