@@ -1,10 +1,10 @@
 Name: hplip
 Summary: HP Linux Imaging and Printing Project
 Version: 3.18.6
-Release: 9
+Release: 10
 License: GPLv2+ and MIT and BSD and IJG and Public Domain and GPLv2+ with exceptions and ISC
 Url: https://developers.hp.com/hp-linux-imaging-and-printing
-Source0: http://downloads.sourceforge.net/sourceforge/hplip/hplip-%{version}.tar.gz
+Source0: https://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz/download?use_mirror=ufpr#/%{name}-%{version}.tar.gz
 Source1: hpcups-update-ppds.sh
 Source2: copy-deviceids.py
 Source3: hplip.appdata.xml
@@ -271,5 +271,8 @@ install -d ${RPM_BUILD_ROOT}%{_datadir}/hplip/prnt/plugins
 %exclude %{python3_sitearch}/*.la
 
 %changelog
+* Tue Sep 15 2020 Ge Wang<wangge20@huawei.com> - 3.18.6-10
+- Modify Source0 Url
+
 * Wed Nov 27 2019 caomeng<caomeng5@huawei.com> -  3.18.6-9
 - Package init
