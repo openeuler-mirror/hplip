@@ -1,7 +1,7 @@
 Name: hplip
 Summary: HP Linux Imaging and Printing Project
 Version: 3.18.6
-Release: 11
+Release: 12
 License: GPLv2+ and MIT and BSD and IJG and Public Domain and GPLv2+ with exceptions and ISC
 Url: https://developers.hp.com/hp-linux-imaging-and-printing
 Source0: https://sourceforge.net/projects/%{name}/files/%{name}/%{version}/%{name}-%{version}.tar.gz/download?use_mirror=ufpr#/%{name}-%{version}.tar.gz
@@ -143,12 +143,16 @@ rm locatedriver
 
 %build
 
+%if "%toolchain" == "clang"
+  CFLAGS="$CFLAGS -Wno-error=int-conversion"
+%endif
+
 sed -i 's|^AM_INIT_AUTOMAKE|AM_INIT_AUTOMAKE([foreign])|g' configure.in
 
 autoreconf --verbose --force --install
 
-export CFLAGS="%{optflags} $(python3-config --includes)"
-export CXXFLAGS="%{optflags} $(python3-config --includes)"
+export CFLAGS="$CFLAGS %{optflags} $(python3-config --includes)"
+export CXXFLAGS="$CXXFLAGS %{optflags} $(python3-config --includes)"
 
 %configure \
         --enable-scan-build --enable-gui-build --enable-fax-build \
@@ -274,6 +278,9 @@ install -d ${RPM_BUILD_ROOT}%{_datadir}/hplip/prnt/plugins
 %exclude %{python3_sitearch}/*.la
 
 %changelog
+* Wed Apr 26 2023 Xiaoya Huang <huangxiaoya@iscas.ac.cn> - 3.18.6-12
+- Fix clang build error
+
 * Tue Sep 15 2020 Ge Wang <wangge20@huawei.com> - 3.18.6-11
 - Modify Source0 Url
 
